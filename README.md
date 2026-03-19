@@ -29,12 +29,6 @@ sudo wget -O /lib/firmware/renesas_usb_fw.mem \
   https://raw.githubusercontent.com/open-astro/uPD72020x/master/UPDATE.mem
 ```
 
-Verify the file size — it should be ~16 KB, **not** ~224 KB (the larger file is the wrong firmware):
-
-```bash
-ls -lh /lib/firmware/renesas_usb_fw.mem
-```
-
 Update the initramfs so the firmware is available at boot, then reboot:
 
 ```bash
@@ -51,7 +45,14 @@ dmesg | grep -i renesas
 You should see a line similar to:
 
 ```
-xhci_pci 0000:xx:xx.x: Firmware for Renesas uPD720201 v3.0.3.0 has been uploaded.
+[   11.737016] xhci-pci-renesas 0000:01:00.0: xHCI Host Controller
+[   11.737053] xhci-pci-renesas 0000:01:00.0: new USB bus registered, assigned bus number 2
+[   11.745989] xhci-pci-renesas 0000:01:00.0: hcc params 0x014051cf hci version 0x100 quirks 0x0000000100000010
+[   11.746483] xhci-pci-renesas 0000:01:00.0: xHCI Host Controller
+[   11.746500] xhci-pci-renesas 0000:01:00.0: new USB bus registered, assigned bus number 3
+[   11.746514] xhci-pci-renesas 0000:01:00.0: Host supports USB 3.0 SuperSpeed
+[   11.997391] usb 2-1: new high-speed USB device number 2 using xhci-pci-renesas
+[ 1219.561568] usb 2-4: new full-speed USB device number 3 using xhci-pci-renesas
 ```
 
 ## Requirements
